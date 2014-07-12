@@ -1,0 +1,291 @@
+<html lang="es-AR">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Documentación del Server-PaBex</title>
+    </head>
+    <body>
+        <h1 align="center">Comandos del cliente</h1>
+        <div>
+            <h3>1- Desconectar.</h3>
+            <p>
+                Sintaxis:<br/>
+                DISCONNECT
+            </p>
+            <div>
+                <label>Valor obligatorio:</label>
+                <ul>
+                    <li>Ninguno</li>
+                </ul>
+            </div>
+            <div>
+                <label>Opciones:</label>
+                <ul>
+                    <li>Ninguna</li>
+                </ul>
+            </div>
+            <div>
+                <label>Respuesta:</label>
+                <ul>
+                    <li>msg_info: Es un mensaje indicando que el cliente se desconectó.</li>
+                </ul>
+            </div>
+            <div>
+                <label>Errores:</label>
+                <ul>
+                    <li>No genera ningún error.</li>
+                </ul>
+            </div>
+            <div>
+                <label>Advertencias:</label>
+                <ul>
+                    <li>No genera ninguna advertencia.</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <h3>2- Comando crear grupo.</h3>
+            <p>
+                Sintaxis:
+                CREATE_GROUP 'nombre del grupo' <-n 'natural'> <-p 'cadena'> <-f 'yes|no'>
+            </p>
+            <p>
+                Valor obligatorio:
+                Necesita un único valor obligatorio y es el nombre del grupo.
+            </p>
+            <div>
+                <label>Opciones:</label>
+                <ul>
+                    <li>
+                        n: Es la cantidad de jugadores máxima que acepta el grupo.
+                    </li>
+                    <li>
+                        p: Es la clave del grupo.
+                    </li>
+                    <li>
+                        f: Determina si el grupo se borra cuando el administrador se desconecta. Un
+                        valor de 'yes' indica que el grupo se borrará cuando el administrador se
+                        desconecte. Un valor 'no' indice que el grupo no se borrará cuando el
+                        administrador se desconecte y pasará la administración a cualquiera de los demás
+                        clientes conectados.
+                        Si el administrador es el único integrante en el grupo entonces se borrará el
+                        grupo independientemente de la opción f.
+                    </li>
+                </ul>
+            </div>
+            <p>
+                Respuesta:
+                id_group: Es el id del grupo creado.
+            </p>
+            <p>
+                Errores:
+                No puede generar ningún error.
+            </p>
+            <p>
+                Advertencias:
+                No puede generar ninguna advertencia.
+            </p>
+        </div>
+        <hr>
+        <div>
+            <h3>3- Unirse a un grupo.</h3>
+            <p>
+                Sintaxis:
+                JOIN 'id del grupo' <-p 'cadena'>
+            </p>
+            <p>
+                Valor obligatorio:
+                Necesita el id del grupo al cual se va a unir.
+            </p>
+            <p>
+                Opciones:
+                p: Es la clave del grupo.
+            </p>
+            <p>
+                Respuesta:
+                id_group: Es el id del grupo al cual se acaba de unir.
+                id_admin: Es el id del administrador del grupo al cual se acaba de unir.
+            </p>
+            <p>
+                Errores:
+                NOT_EXISTS_GROUP: No existe el grupo especificado por el id.
+                GROUP_IS_FULL: El grupo está lleno.
+                DUPLICATE_IN_GROUP: El cliente ya está conectado a este grupo.
+                NOT_PASSWORD: El cliente no proveyó una clave a un grupo privado.
+                INVALID_KEY: Clave inválida.
+            </p>
+            <p>
+                Advertencias:
+            </p>
+        </div>
+        <hr>
+        <div>
+            <h3>4- Abandonar un grupo.</h3>
+            <p>
+                Sintaxis:
+                LEAVE_GROUP 'id del grupo'
+            </p>
+            <p>
+                Valor obligatorio:
+                Necesita el id del grupo al cual se va a unir.
+            </p>
+            <p>
+                Opciones:
+                p: Es la clave del grupo.
+            </p>
+            <p>
+                Respuesta:
+                msg_info: Es un mensaje de información.
+            </p>
+            <p>
+                Errores:
+                NOT_EXISTS_GROUP: No existe el grupo especificado en el id.
+                NOT_EXISTS_CLIENT_IN_GROUP: El cliente no existe en el grupo especificado en
+                el id.
+            </p>
+            <p>
+                Advertencias:
+                No devuelve ninguna advertencia.
+            </p>
+            <p>
+                Mensaje indirectos:
+                InformationResponse (clave:valor)
+                source: 'leave_group'
+                id_group: Id del grupo abandonado.
+                deleted_group: Indica si el grupo ha sido eliminado.
+                (Se puede usar un Interpreter para evitar usar estas claves).
+            </p>
+            <p>
+                Función interna:
+                El cliente que ejecuta este comando abandona el grupo.
+                Si dicho cliente no es el administrador del grupo entonces simplemente se lo
+                elimina al cliente del grupo. En cambio, si el cliente es el administrador del
+                grupo entonces se evalúa el atributo forceToDelete. Si este atributo es true
+                entonces se procede a borrar el grupo informando a todos los integrantes del
+                grupo lo ocurrido. Por el contrario, si este atributo es false, se procede a
+                entregarle la administración del grupo a otro cliente.
+            </p>
+        </div>
+        <hr>
+        <div>
+            <h3>5- Consultar grupos.</h3>
+            <p>
+                Sintaxis:
+                SHOW_GROUPS
+            </p>
+            <p>
+                Valor obligatorio:
+                Ninguno
+            </p>
+            <p>
+                Opciones:
+                Ninguna
+            </p>
+            <p>
+                Respuesta:
+                id_groups: Los ids de los grupos.
+                xxx_group_name: Nombre de cada grupo.
+                xxx_id_admin: Id de cada grupo.
+                xxx_max_num: Número máximo de cada grupo.
+                xxx_is_private: Indica si el grupo es privado (true o false).
+                xxx_nocc: Número de clients conectados (Number of connected clients).
+            </p>
+            <p>
+                Errores:
+                Ninguno
+            </p>
+            <p>
+                Advertencias:
+                Ninguna
+            </p>
+            <p>
+                Mensaje indirectos:
+                Ninguno
+            </p>
+        </div>
+        <hr>
+        <div>
+            <h3>6- Consultar grupo.</h3>
+            <p>
+                Sintaxis:
+                SHOW_GROUP 'id del grupo'
+            </p>
+            <p>
+                Valor obligatorio:
+                group_id: Id del grupo que se quiere consultar.
+            </p>
+            <p>
+                Opciones:
+                Ninguna
+            </p>
+            <p>
+                Respuesta:
+            </p>
+            <p>
+                Errores:
+            </p>
+            <p>
+                Advertencias:
+            </p>
+            <p>
+                Mensaje indirectos:
+                Ninguno.
+            </p>
+        </div>
+        <hr>
+        <div>
+            <h3>7- Enviar mensaje a grupo.</h3>
+        </div>
+        <hr>
+        <div>
+            <h3>8- Enviar mensaje a cliente.</h3>
+        </div>
+        <hr>
+        <div>
+            <h3>9- Agregar atributo.</h3>
+            <p>
+                Sintaxis:
+                ADD_ATTRIBUTE 'key1, key2,..., key3' 'value1, value2,..., value3' <-v 'true|false'>
+            </p>
+            <p>
+                Valor obligatorio:
+                key1, key2,..., key3: Son las claves de los atributos.
+                value1, value2,..., value3: Son los valores de los atributos.
+            </p>
+            <p>
+                Opciones:
+                v: (Verbose) Indica si debe avisar a los clientes de los grupos que forma
+                parte.
+            </p>
+            <p>
+                Respuesta:
+                msg_info: Es un mensaje indicando que el cliente agrego atributo/s.
+            </p>
+            <p>
+                Errores:
+                INCORRECT_LENGTH_KEY_VALUE: La cantidad de claves difiere a la cantidad de
+                valores.
+            </p>
+            <p>
+                Advertencias:
+                Ninguna
+            </p>
+            <p>
+                Mensaje indirectos:
+                Envía un Informatio Response de tipo 'add_attribute' a todos los clientes
+                que están en algunos de sus grupos.
+            </p>
+        </div>
+        <hr>
+        <div>
+            <h3>10- Consultar atributos.</h3>
+        </div>
+        <hr>
+        <div>
+            <h3>11- Borrar atributos.</h3>
+        </div>
+        <hr>
+        <h5>Autor: Parisi Germán</h5>
+        <h5>Version: 1.0</h5>
+    </body>
+</html>

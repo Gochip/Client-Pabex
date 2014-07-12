@@ -1,0 +1,16 @@
+CREATE_GROUP 
+CREATE_GROUP 'grupo1' '584692' -p 'mi contrasena' -n '10'
+CREATE_GROUP 'grupoH'
+CREATE_GROUP 'grupo9' '324463' -n 
+CREATE_GROUP 'grupo9' '324463' -n -p
+CREATE_GROUP 'grupo9' '324463'
+CREATE_GROUP 'grupo9' '32446d3'
+CRETE_GROUP 'grupo9' '32446d3'
+CREATE_GROUP 'grupo9' '324463' -p '
+CREATE_GROUP 'grupo9' '324463' -p 'sad'
+CREATE_GROUP 'grupo9' '3.24463' -p 'sad'
+CREATE_GROUP 'grupo9' '-324463' -p 'sad'
+JOIN 'g1' 'dssa12' -p reeeere
+JOIN 'g1' 'dssa12' -p 'reeeere'
+JOIN 'g1' 'dssa12'
+JOIN 'g1' 'dssa12' 'asdsa'
