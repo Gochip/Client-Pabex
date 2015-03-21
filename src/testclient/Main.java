@@ -73,6 +73,8 @@ public class Main {
                 } else if (linea.equals("id")) {
                     System.out.println(cl.getId());
                     continue;
+                } else if(linea.equals("")){
+                    continue;
                 }
                 CommandResponse resp = cl.send(linea);
                 String clave = "";

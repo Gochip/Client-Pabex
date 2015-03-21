@@ -251,39 +251,71 @@
         <hr>
         <div>
             <h3>5- Consultar grupos.</h3>
-            <p>
-                Sintaxis:
-                SHOW_GROUPS
-            </p>
-            <p>
-                Valor obligatorio:
-                Ninguno
-            </p>
-            <p>
-                Opciones:
-                Ninguna
-            </p>
-            <p>
-                Respuesta:
-                id_groups: Los ids de los grupos.
-                xxx_group_name: Nombre de cada grupo.
-                xxx_id_admin: Id de cada grupo.
-                xxx_max_num: Número máximo de cada grupo.
-                xxx_is_private: Indica si el grupo es privado (true o false).
-                xxx_nocc: Número de clients conectados (Number of connected clients).
-            </p>
-            <p>
-                Errores:
-                Ninguno
-            </p>
-            <p>
-                Advertencias:
-                Ninguna
-            </p>
-            <p>
-                Mensaje indirectos:
-                Ninguno
-            </p>
+            <div>
+                <label>Sintaxis:</label>
+                <ul>
+                    <li>
+                        SHOW_GROUPS
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Valor obligatorio:</label>
+                <ul>
+                    <li>
+                        Ninguno
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Opciones:</label>
+                <ul>
+                    <li>
+                        Ninguna
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Respuesta:</label>
+                <ul>
+                    <li>
+                        id_groups: Los ids de los grupos.
+                    </li>
+                    <li>
+                        xxx_group_name: Nombre de cada grupo.
+                    </li>
+                    <li>
+                        xxx_id_admin: Id de cada grupo.
+                    </li>
+                    <li>
+                        xxx_max_num: Número máximo de cada grupo.
+                    </li>
+                    <li>
+                        xxx_is_private: Indica si el grupo es privado (true o false).
+                    </li>
+                    <li>
+                        xxx_nocc: Número de clients conectados (Number of connected clients).
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Errores:</label>
+                <ul>
+                    <li>Ninguno</li>
+                </ul>
+            </div>
+            <div>
+                <label>Advertencias:</label>
+                <ul>
+                    <li>Ninguna</li>
+                </ul>
+            </div>
+            <div>
+                <label>Notificaciones:</label>
+                <ul>
+                    <li>Ninguno</li>
+                </ul>
+            </div>
         </div>
         <hr>
         <div>
@@ -432,111 +464,167 @@
         <hr>
         <div>
             <h3>9- Agregar atributo.</h3>
-            <p>
-                Sintaxis:
-                ADD_ATTRIBUTE 'key1, key2,..., key3' 'value1, value2,..., value3' <-v 'true|false'>
-            </p>
-            <p>
-                Valor obligatorio:
-                key1, key2,..., key3: Son las claves de los atributos.
-                value1, value2,..., value3: Son los valores de los atributos.
-            </p>
-            <p>
-                Opciones:
-                v: (Verbose) Indica si debe avisar a los clientes de los grupos que forma
-                parte.
-            </p>
-            <p>
-                Respuesta:
-                msg_info: Es un mensaje indicando que el cliente agrego atributo/s.
-            </p>
-            <p>
-                Errores:
-                INCORRECT_LENGTH_KEY_VALUE: La cantidad de claves difiere a la cantidad de
-                valores.
-            </p>
-            <p>
-                Advertencias:
-                Ninguna
-            </p>
-            <p>
-                Mensaje indirectos:
-                Envía un Informatio Response de tipo 'add_attribute' a todos los clientes
-                que están en algunos de sus grupos.
-            </p>
-        </div>
-        <hr>
-        <div>
-            <h3>10- Consultar atributos.</h3>
             <div>
                 <label>Sintaxis:</label>
                 <ul>
-                    <li></li>
+                    <li>
+                        ADD_ATTRIBUTE 'key1, key2,..., key3' 'value1, value2,..., value3' <-v 'true|false'>
+                    </li>
                 </ul>
             </div>
             <div>
                 <label>Valor obligatorio:</label>
                 <ul>
-                    <li></li>
+                    <li>
+                        key1, key2,..., key3: Son las claves de los atributos. Los espacios en los extremos son ignorados.
+                    </li>
+                    <li>
+                        value1, value2,..., value3: Son los valores de los atributos. Los espacios en los extremos son ignorados.
+                    </li>
                 </ul>
             </div>
             <div>
                 <label>Opciones:</label>
                 <ul>
                     <li>
-                        
+                        v: (Verbose) Indica si debe avisar a los clientes de los grupos que forma parte.
                     </li>
                 </ul>
             </div>
             <div>
                 <label>Respuesta:</label>
-                
+                <ul>
+                    <li>msg_info: Es un mensaje indicando que el cliente agrego atributo/s.</li>
+                </ul>
             </div>
             <div>
                 <label>Errores:</label>
+                <ul>
+                    <li>
+                        (10) INCORRECT_LENGTH_KEY_VALUE: La cantidad de claves difiere a la cantidad de valores.
+                    </li>
+                </ul>
             </div>
             <div>
                 <label>Advertencias:</label>
+                <ul>
+                    <li>Ninguna</li>
+                </ul>
             </div>
             <div>
                 <label>Notificaciones:</label>
+                <ul>
+                    <li>
+                        InformationResponse: A todos los clientes que están en algunos de sus grupos.
+                        <ul>
+                            <li>
+                                Source: 'add_attribute'
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
         <hr>
         <div>
-            <h3>11- Borrar atributos.</h3>
+            <h3>10- Consultar atributo.</h3>
             <div>
                 <label>Sintaxis:</label>
                 <ul>
-                    <li></li>
+                    <li>GET_ATTRIBUTE 'key'</li>
                 </ul>
             </div>
             <div>
                 <label>Valor obligatorio:</label>
                 <ul>
-                    <li></li>
+                    <li>El atributo a consultar.</li>
                 </ul>
             </div>
             <div>
                 <label>Opciones:</label>
                 <ul>
                     <li>
-                        
+                        Ninguna
                     </li>
                 </ul>
             </div>
             <div>
                 <label>Respuesta:</label>
-                
+                <ul>
+                    <li>
+                        value: Es el valor del atributo consultado.
+                    </li>
+                </ul>
             </div>
             <div>
                 <label>Errores:</label>
+                <ul>
+                    <li>
+                        (9) NOT_EXISTS_KEY: No existe la clave.
+                    </li>
+                </ul>
             </div>
             <div>
                 <label>Advertencias:</label>
+                <ul>
+                    <li>Ninguna</li>
+                </ul>
             </div>
             <div>
                 <label>Notificaciones:</label>
+                <ul>
+                    <li>Ninguna</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <h3>11- Borrar atributo.</h3>
+            <div>
+                <label>Sintaxis:</label>
+                <ul>
+                    <li>REMOVE_ATTRIBUTE 'key'</li>
+                </ul>
+            </div>
+            <div>
+                <label>Valor obligatorio:</label>
+                <ul>
+                    <li>El atributo a borrar.</li>
+                </ul>
+            </div>
+            <div>
+                <label>Opciones:</label>
+                <ul>
+                    <li>
+                        Ninguna
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Respuesta:</label>
+                <ul>
+                    <li>
+                        resp: Un mensaje indicando la situación.
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Errores:</label>
+                <ul>
+                    <li>(9) NOT_EXISTS_KEY: No existe la clave.</li>
+                </ul>
+            </div>
+            <div>
+                <label>Advertencias:</label>
+                <ul>
+                    <li>Ninguna</li>
+                </ul>
+            </div>
+            <div>
+                <label>Notificaciones:</label>
+                <ul>
+                    <li>Ninguna</li>
+                </ul>
             </div>
         </div>
         <hr>
