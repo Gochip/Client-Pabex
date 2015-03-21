@@ -203,50 +203,77 @@
         <hr>
         <div>
             <h3>4- Abandonar un grupo.</h3>
-            <p>
-                Sintaxis:
-                LEAVE_GROUP 'id del grupo'
-            </p>
-            <p>
-                Valor obligatorio:
-                Necesita el id del grupo al cual se va a unir.
-            </p>
-            <p>
-                Opciones:
-                p: Es la clave del grupo.
-            </p>
-            <p>
-                Respuesta:
-                msg_info: Es un mensaje de información.
-            </p>
-            <p>
-                Errores:
-                NOT_EXISTS_GROUP: No existe el grupo especificado en el id.
-                NOT_EXISTS_CLIENT_IN_GROUP: El cliente no existe en el grupo especificado en
-                el id.
-            </p>
-            <p>
-                Advertencias:
-                No devuelve ninguna advertencia.
-            </p>
-            <p>
-                Mensaje indirectos:
-                InformationResponse (clave:valor)
-                source: 'leave_group'
-                id_group: Id del grupo abandonado.
-                deleted_group: Indica si el grupo ha sido eliminado.
-                (Se puede usar un Interpreter para evitar usar estas claves).
-            </p>
-            <p>
-                Función interna:
-                El cliente que ejecuta este comando abandona el grupo.
-                Si dicho cliente no es el administrador del grupo entonces simplemente se lo
-                elimina al cliente del grupo. En cambio, si el cliente es el administrador del
-                grupo entonces se evalúa el atributo forceToDelete. Si este atributo es true
-                entonces se procede a borrar el grupo informando a todos los integrantes del
-                grupo lo ocurrido. Por el contrario, si este atributo es false, se procede a
-                entregarle la administración del grupo a otro cliente.
-            </p>
+            <div>
+                <label>Sintaxis:</label>
+                <ul>
+                    <li>LEAVE_GROUP 'id del grupo'</li>
+                </ul>
+            </div>
+            <div>
+                <label>Valor obligatorio:</label>
+                <ul>
+                    <li>
+                        Necesita el id del grupo del cual va a abandonar.
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Opciones:</label>
+                <ul>
+                    <li>p: Es la clave del grupo.</li>
+                </ul>
+            </div>
+            <div>
+                <label>Respuesta:</label>
+                <ul>
+                    <li>msg_info: Es un mensaje de información.</li>
+                </ul>
+            </div>
+            <div>
+                <label>Errores:</label>
+                <ul>
+                    <li>NOT_EXISTS_GROUP: No existe el grupo especificado en el id.</li>
+                    <li>NOT_EXISTS_CLIENT_IN_GROUP: El cliente no pertenece al grupo.</li>
+                </ul>
+            </div>
+            <div>
+                <label>Advertencias:</label>
+                <ul>
+                    <li>Ninguna</li>
+                </ul>
+            </div>
+            <div>
+                <label>Notificaciones:</label>
+                <ul>
+                    <li>
+                        InformationResponse (clave:valor)
+                        <ul>
+                            <li>
+                                source: 'leave_group'
+                            </li>
+                            <li>
+                                id_group: Id del grupo abandonado.
+                            </li>
+                            <li>
+                                deleted_group: Indica si el grupo ha sido eliminado.
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Más</label>
+                <p>
+                    Función interna:
+                    El cliente que ejecuta este comando abandona el grupo.
+                    Si dicho cliente no es el administrador del grupo entonces simplemente se lo
+                    elimina al cliente del grupo. En cambio, si el cliente es el administrador del
+                    grupo entonces se evalúa el atributo forceToDelete. Si este atributo es true
+                    entonces se procede a borrar el grupo informando a todos los integrantes del
+                    grupo lo ocurrido. Por el contrario, si este atributo es false, se procede a
+                    entregarle la administración del grupo a otro cliente.
+                </p>
+            </div>
         </div>
         <hr>
         <div>
@@ -393,35 +420,53 @@
             <div>
                 <label>Sintaxis:</label>
                 <ul>
-                    <li></li>
+                    <li>MESSAGE_GROUP 'id_group' 'mensaje' [-e 'excluido1, excluido2, ..., excluidoN']</li>
                 </ul>
             </div>
             <div>
                 <label>Valor obligatorio:</label>
                 <ul>
-                    <li></li>
+                    <li>id_group</li>
+                    <li>mensaje</li>
                 </ul>
             </div>
             <div>
                 <label>Opciones:</label>
                 <ul>
                     <li>
-                        
+                        e: Los clientes a excluir.
                     </li>
                 </ul>
             </div>
             <div>
                 <label>Respuesta:</label>
-                
+                <ul>
+                    <li>error</li>
+                    <li>error_info</li>
+                    <li>warning</li>
+                    <li>warning_info</li>
+                    <li>count: Cantidad de destinarios del mensaje.</li>
+                </ul>
             </div>
             <div>
                 <label>Errores:</label>
+                <ul>
+                    <li>(1) NOT_EXISTS_GROUP: El grupo indicado no existe.</li>
+                    <li>(2) NOT_CLIENT_IN_GROUP: El cliente que ejecutó este comando no pertenece al grupo.</li>
+                </ul>
             </div>
             <div>
                 <label>Advertencias:</label>
+                <ul>
+                    <li>(1) INVALID_CLIENT: Un cliente excluído no existe.</li>
+                    <li>(2) NOT_EXISTS_CLIENT_IN_GROUP: Un cliente excluído no pertenece al grupo.</li>
+                </ul>
             </div>
             <div>
                 <label>Notificaciones:</label>
+                <ul>
+                    <li>Ninguna</li>
+                </ul>
             </div>
         </div>
         <hr>
@@ -430,35 +475,54 @@
             <div>
                 <label>Sintaxis:</label>
                 <ul>
-                    <li></li>
+                    <li>MESSAGE_CLIENT 'id_client' 'mensaje': (error, error_info)</li>
                 </ul>
             </div>
             <div>
                 <label>Valor obligatorio:</label>
                 <ul>
-                    <li></li>
+                    <li>id_cliente: Es el id de cliente</li>
+                    <li>mensaje</li>
                 </ul>
             </div>
             <div>
                 <label>Opciones:</label>
                 <ul>
                     <li>
-                        
+                        Ninguna
                     </li>
                 </ul>
             </div>
             <div>
                 <label>Respuesta:</label>
-                
+                <ul>
+                    <li>
+                        error
+                    </li>
+                    <li>
+                        error_info
+                    </li>
+                </ul>
             </div>
             <div>
                 <label>Errores:</label>
+                <ul>
+                    <li>
+                        (7) NOT_EXISTS_CLIENT: No existe el cliente destinatario.
+                    </li>
+                </ul>
             </div>
             <div>
                 <label>Advertencias:</label>
+                <ul>
+                    <li>Ninguna</li>
+                </ul>
             </div>
             <div>
                 <label>Notificaciones:</label>
+                <ul>
+                    <li>Ninguna</li>
+                </ul>
             </div>
         </div>
         <hr>
