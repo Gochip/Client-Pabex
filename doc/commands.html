@@ -7,10 +7,14 @@
         <h1 align="center">Comandos del cliente</h1>
         <div>
             <h3>1- Desconectar.</h3>
-            <p>
-                Sintaxis:<br/>
-                DISCONNECT
-            </p>
+            <div>
+                <label>Sintaxis:</label>
+                <ul>
+                    <li>
+                        DISCONNECT
+                    </li>
+                </ul>
+            </div>
             <div>
                 <label>Valor obligatorio:</label>
                 <ul>
@@ -41,18 +45,34 @@
                     <li>No genera ninguna advertencia.</li>
                 </ul>
             </div>
+            <div>
+                <label>Notificaciones:</label>
+                <ul>
+                    <li>
+                        DisconnectResponse: A los demás integrantes del grupo.
+                    </li>
+                </ul>
+            </div>
         </div>
         <hr>
         <div>
             <h3>2- Comando crear grupo.</h3>
-            <p>
-                Sintaxis:
-                CREATE_GROUP 'nombre del grupo' <-n 'natural'> <-p 'cadena'> <-f 'yes|no'>
-            </p>
-            <p>
-                Valor obligatorio:
-                Necesita un único valor obligatorio y es el nombre del grupo.
-            </p>
+            <div>
+                <label>Sintaxis:</label>
+                <ul>
+                    <li>
+                        CREATE_GROUP 'nombre del grupo' <-n 'natural'> <-p 'cadena'> <-f 'yes|no'>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Valor obligatorio:</label>
+                <ul>
+                    <li>
+                        Necesita un único valor obligatorio y es el nombre del grupo.
+                    </li>
+                </ul>
+            </div>
             <div>
                 <label>Opciones:</label>
                 <ul>
@@ -65,7 +85,7 @@
                     <li>
                         f: Determina si el grupo se borra cuando el administrador se desconecta. Un
                         valor de 'yes' indica que el grupo se borrará cuando el administrador se
-                        desconecte. Un valor 'no' indice que el grupo no se borrará cuando el
+                        desconecte. Un valor 'no' indica que el grupo no se borrará cuando el
                         administrador se desconecte y pasará la administración a cualquiera de los demás
                         clientes conectados.
                         Si el administrador es el único integrante en el grupo entonces se borrará el
@@ -73,50 +93,112 @@
                     </li>
                 </ul>
             </div>
-            <p>
-                Respuesta:
-                id_group: Es el id del grupo creado.
-            </p>
-            <p>
-                Errores:
-                No puede generar ningún error.
-            </p>
-            <p>
-                Advertencias:
-                No puede generar ninguna advertencia.
-            </p>
+            <div>
+                <label>Respuesta:</label>
+                <ul>
+                    <li>
+                        id_group: Es el id del grupo creado.
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Errores:</label>
+                <ul>
+                    <li>
+                        No puede generar ningún error.
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Advertencias:</label>
+                <ul>
+                    <li>No puede generar ninguna advertencia.</li>
+                </ul>
+            </div>
+            <div>
+                <label>Notificaciones:</label>
+                <ul>
+                    <li>No puede generar ninguna notificación.</li>
+                </ul>
+            </div>
         </div>
         <hr>
         <div>
             <h3>3- Unirse a un grupo.</h3>
-            <p>
-                Sintaxis:
-                JOIN 'id del grupo' <-p 'cadena'>
-            </p>
-            <p>
-                Valor obligatorio:
-                Necesita el id del grupo al cual se va a unir.
-            </p>
-            <p>
-                Opciones:
-                p: Es la clave del grupo.
-            </p>
-            <p>
-                Respuesta:
-                id_group: Es el id del grupo al cual se acaba de unir.
-                id_admin: Es el id del administrador del grupo al cual se acaba de unir.
-            </p>
-            <p>
-                Errores:
-                NOT_EXISTS_GROUP: No existe el grupo especificado por el id.
-                GROUP_IS_FULL: El grupo está lleno.
-                DUPLICATE_IN_GROUP: El cliente ya está conectado a este grupo.
-                NOT_PASSWORD: El cliente no proveyó una clave a un grupo privado.
-                INVALID_KEY: Clave inválida.
-            </p>
-            <p>
-                Advertencias:
-            </p>
+            <div>
+                <label>Sintaxis:</label>
+                <ul>
+                    <li>
+                        JOIN 'id del grupo' <-p 'cadena'>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Valor obligatorio:</label>
+                <ul>
+                    <li>Necesita el id del grupo al cual se va a unir.</li>
+                </ul>
+            </div>
+            <div>
+                <label>Opciones:</label>
+                <ul>
+                    <li>
+                        p: Es la clave del grupo.
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Respuesta:</label>
+                <ul>
+                    <li>
+                        id_group: Es el id del grupo al cual se acaba de unir.
+                    </li>
+                    <li>
+                        id_admin: Es el id del administrador del grupo al cual se acaba de unir.
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Errores:</label>
+                <ul>
+                    <li>
+                        (1) NOT_EXISTS_GROUP: No existe el grupo especificado por el id.
+                    </li>
+                    <li>
+                        (3) GROUP_IS_FULL: El grupo está lleno.
+                    </li>
+                    <li>
+                        (4) DUPLICATE_IN_GROUP: El cliente ya está conectado a este grupo.
+                    </li>
+                    <li>
+                        (5) NOT_PASSWORD: El cliente no proveyó una clave a un grupo privado.
+                    </li>
+                    <li>
+                        (6) INVALID_KEY: Clave inválida.
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Advertencias:</label>
+                <ul>
+                    <li>
+                        Ninguna
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <label>Notificaciones:</label>
+                <ul>
+                    <li>
+                        InformationResponse: A los demás integrantes del grupo.
+                        <ul>
+                            <li>
+                                Source: join
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
         <hr>
         <div>
@@ -285,6 +367,14 @@
             <h3>11- Borrar atributos.</h3>
         </div>
         <hr>
+        <div>
+            <h3>Otros errores</h3>
+            <ul>
+                <li>
+                    (11) Comando mal escrito
+                </li>
+            </ul>
+        </div>
         <h5>Autor: Parisi Germán</h5>
         <h5>Version: 1.0</h5>
     </body>
