@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.difusion;
 
 import java.awt.image.BufferedImage;
@@ -10,23 +6,22 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
  *
- * @author PaBex
+ * @author Parisi Germán
  * @version
  */
-public class ImageDifusion implements java.io.Serializable {
+public class ImageDifusion extends Diffusion implements Serializable {
 
     private byte image[];
-    private String idGroup;
-    private String idTransmitter;
     
     public ImageDifusion(String idGroup) {
-        this.idGroup = idGroup;
+        super(idGroup);
     }
 
     public void setImage(String url) {
@@ -46,10 +41,6 @@ public class ImageDifusion implements java.io.Serializable {
         return url.substring(ind + 1, url.length());
     }
 
-    public String getIdGroup() {
-        return idGroup;
-    }
-
     public File getImage(String url) {
         File file = new File(url);
         try {
@@ -64,14 +55,6 @@ public class ImageDifusion implements java.io.Serializable {
             Logger.getLogger(ImageDifusion.class.getName()).log(Level.SEVERE, null, ex);
         }
         return file;
-    }
-    
-        public String getIdTransmitter() {
-        return idTransmitter;
-    }
-
-    public void setIdTransmitter(String idTransmitter) {
-        this.idTransmitter = idTransmitter;
     }
 
 //    public static void main(String args[]) {

@@ -6,7 +6,7 @@ import com.client.listener.DisconnectListener;
 import com.client.listener.ImageListener;
 import com.client.listener.ObjectListener;
 import com.difusion.ImageDifusion;
-import com.difusion.ObjectDifusion;
+import com.difusion.ObjectDiffusion;
 import executors.response.CommandResponse;
 import executors.response.DisconnectResponse;
 import executors.response.MessageResponse;
@@ -113,13 +113,13 @@ class InputThread implements Runnable {
                                 }).start();
                             }
                         }
-                    } else if (resp instanceof ObjectDifusion) {
+                    } else if (resp instanceof ObjectDiffusion) {
                         for (final EventListener el : client.getEvents()) {
                             if (el instanceof ObjectListener) {
                                 new Thread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        ((ObjectListener) el).objectReceived((ObjectDifusion) resp);
+                                        ((ObjectListener) el).objectReceived((ObjectDiffusion) resp);
                                     }
                                 }).start();
                             }

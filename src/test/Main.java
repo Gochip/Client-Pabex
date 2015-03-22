@@ -1,4 +1,4 @@
-package testclient;
+package test;
 
 import com.client.Client;
 import com.client.listener.DisconnectListener;

@@ -1,6 +1,6 @@
 package com.client.listener;
 
-import com.difusion.ObjectDifusion;
+import com.difusion.ObjectDiffusion;
 import java.util.EventListener;
 
 /**
@@ -8,5 +8,5 @@ import java.util.EventListener;
  * @author Parisi Germán
  */
 public interface ObjectListener extends EventListener{
-public void objectReceived(ObjectDifusion object);
+public void objectReceived(ObjectDiffusion object);
 }

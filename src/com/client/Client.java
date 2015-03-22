@@ -1,6 +1,7 @@
 package com.client;
 
 import com.client.listener.MessageListener;
+import com.difusion.Diffusion;
 import executors.response.CommandResponse;
 import executors.response.MessageResponse;
 import java.io.IOException;
@@ -98,6 +99,9 @@ public class Client {
     public synchronized CommandResponse send(Serializable c) {
         //assert c != null;
         try {
+            if(c instanceof Diffusion){
+                ((Diffusion)c).setIdSender(id);
+            }
             oos.writeObject(c);
             oos.flush();
             while (Buffer.getCommandResponse() == null && !inputThread.isStopped()) {
