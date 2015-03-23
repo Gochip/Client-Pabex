@@ -1,9 +1,7 @@
 package com.client;
 
-import com.client.listener.MessageListener;
 import com.difusion.Diffusion;
 import executors.response.CommandResponse;
-import executors.response.MessageResponse;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -20,8 +18,8 @@ import senders.CreateGroup;
  *
  * Se aplica el patrón Singleton.
  *
- * @author Parisi Germán & Bertola Federico
- * @version 1.1
+ * @author Parisi Germán y Bertola Federico
+ * @version 1.2
  */
 public class Client {
 
@@ -37,9 +35,13 @@ public class Client {
      */
     private ArrayList<EventListener> events;
     /**
-     * Hilo escuchador.
+     * Hilo escuchador TCP.
      */
     private InputThread inputThread;
+    /**
+     * Hilo escuchado UDP.
+     */
+    private InputThreadUDP udp;
     /**
      * Canal de comunicación.
      */
@@ -145,12 +147,7 @@ public class Client {
     public String getId() {
         return this.id;
     }
-    /*
-     ***************************************************************************
-     * Métodos con visibilidad default: accesible desde el paquete.
-     ***************************************************************************
-     */
-
+    
     /**
      *
      * @return el socket de comunicación.
@@ -171,45 +168,34 @@ public class Client {
         this.id = id;
     }
 
-    public String getBuffer() {
-        return InputThreadUDP.getInstance(s.getInetAddress()).getBuffer();
-    }
-
-    public boolean isBufferEmpty() {
-        return InputThreadUDP.getInstance(s.getInetAddress()).isBufferEmpty();
-    }
-
+    /**
+     * Este método inicializa la configuración para UDP.
+     * Envía el puerto de escucha UDP al servidor.
+     */
     public void initUDP() {
-        InputThreadUDP udp = InputThreadUDP.getInstance(s.getInetAddress());
+        int listenPort = 6002;
+        initUDP(listenPort);
+    }
+    
+    /**
+     * Este método inicializa la configuración para UDP.
+     * Envía el puerto de escucha UDP al servidor.
+     * @param listenPort es el puerto de escucha.
+     */
+    public void initUDP(int listenPort) {
+        send("CONFIGURE_UDP '" + listenPort + "'");
+        udp = new InputThreadUDP(s.getInetAddress(), this, listenPort);
         new Thread(udp).start();
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                while (true) {
-                    if (!isBufferEmpty()) {
-                        String cadena = getBuffer();
-                        final MessageResponse resp = new MessageResponse();
-                        resp.addText(cadena);
-                        resp.addId("-1");
-                        for (final EventListener el : me.getEvents()) {
-                            if (el instanceof MessageListener) {
-                                new Thread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        ((MessageListener) el).messageReceived(resp);
-                                    }
-                                }).start();
-                            }
-                        }
-                    }
-                }
-            }
-        }, "EscuchadorUDP").start();
     }
 
+    /**
+     * Envia datos a un grupo por UDP.
+     * 
+     * Debe llamar antes a initUDP.
+     * @param idGroup es el id del grupo al que se va a enviar.
+     * @param data son los datos a enviar.
+     */
     public void sendUDP(String idGroup, String data) {
-        InputThreadUDP udp = InputThreadUDP.getInstance(s.getInetAddress());
         udp.sendData(idGroup, id, data);
     }
 

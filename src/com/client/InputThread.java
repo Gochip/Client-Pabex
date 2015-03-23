@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * Es el hilo escuchador que de acuerdo al Response que llega del servidor
  * actúa.
  *
- * @author Parisi Germán & Bertola Federico
+ * @author Parisi Germán y Bertola Federico
  * @version 1.0
  */
 class InputThread implements Runnable {
