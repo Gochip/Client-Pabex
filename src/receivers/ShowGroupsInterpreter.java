@@ -7,6 +7,7 @@ import java.util.List;
 /**
  *
  * @author Parisi Germán
+ * @version 1.0
  */
 public class ShowGroupsInterpreter {
 
@@ -36,8 +37,8 @@ public class ShowGroupsInterpreter {
         return this.commandResponse.getValue(groupId + "_id_admin");
     }
 
-    public String getMaxNum(String groupId) {
-        return this.commandResponse.getValue(groupId + "_max_num");
+    public int getMaxNum(String groupId) {
+        return Integer.parseInt(this.commandResponse.getValue(groupId + "_max_num"));
     }
 
     public String isPrivate(String groupId) {
