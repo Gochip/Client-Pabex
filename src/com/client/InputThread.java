@@ -56,7 +56,7 @@ class InputThread implements Runnable {
      * MessageResponse entonces genera el evento.
      */
     @Override
-    public void run() {
+    public void run(){
         try {
             client.setId(ois.readUTF());
         } catch (IOException ex) {
@@ -127,13 +127,15 @@ class InputThread implements Runnable {
                     }
                 } else {
                 }
-            } catch (EOFException | SocketException e) {
-                Logger.getLogger(InputThread.class.getName()).log(Level.INFO, "El server dejó de responder.", e);
+            } catch (SocketException se) {
+                System.err.println("El servidor se detuvo");
+                stop = true;
+            } catch (EOFException e) {
+                Logger.getLogger(InputThread.class.getName()).log(Level.INFO, null, e);
             } catch (IOException | ClassNotFoundException ex) {
                 Logger.getLogger(InputThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }
 
     /**

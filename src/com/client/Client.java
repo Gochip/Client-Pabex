@@ -57,7 +57,7 @@ public class Client {
      * @param puerto es el puerto de entrada en el servidor.
      * @throws UnknownHostException no se encontró la ip del servidor.
      * @throws IOException no pudo crear el flujo de salida.
-     */
+     */    
     private Client(String ip, int puerto, String pass) throws UnknownHostException, IOException {
         this.frameworkPassword = pass;
         s = new Socket(ip, puerto);
@@ -68,7 +68,6 @@ public class Client {
         inputThread = new InputThread(this);
         Thread t = new Thread(inputThread, "EscuchadorTCP");
         t.start();
-
     }
 
     /**
