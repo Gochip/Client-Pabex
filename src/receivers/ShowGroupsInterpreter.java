@@ -41,8 +41,8 @@ public class ShowGroupsInterpreter {
         return Integer.parseInt(this.commandResponse.getValue(groupId + "_max_num"));
     }
 
-    public String isPrivate(String groupId) {
-        return this.commandResponse.getValue(groupId + "_is_private");
+    public boolean isPrivate(String groupId) {
+        return this.commandResponse.getValue(groupId + "_is_private").equals("true");
     }
 
     public String getNumberOfConnectedClients(String groupId) {
